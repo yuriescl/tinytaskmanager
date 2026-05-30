@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 
-# ttm
+# tinytaskmanager
 # Tiny task manager for Linux, MacOS and Unix-like systems.
 # Written as a single Python script.
 # MIT License
 # Copyright (c) 2022 Yuri Escalianti <yuriescl@gmail.com>
-# Homepage: https://github.com/yuriescl/ttm
+# Homepage: https://github.com/yuriescl/tinytaskmanager
 
 from datetime import datetime
 from fcntl import LOCK_EX, LOCK_UN, lockf
@@ -32,7 +32,7 @@ if version_info[0] < 3 or version_info[1] < 8:
 
 
 LOCK_FILE_NAME = "lock"
-CACHE_DIR = Path.home() / ".ttm"
+CACHE_DIR = Path.home() / ".tinytaskmanager"
 LOCK_PATH = Path(CACHE_DIR / LOCK_FILE_NAME)
 
 RESERVED_FILE_NAMES = [LOCK_FILE_NAME]
@@ -610,7 +610,7 @@ def remove_task_by_name(name: str):
                     raise TtmException(
                         "Cannot remove task while it's running.\n"
                         "To stop it, run:\n"
-                        f"ttm stop {name}"
+                        f"tinytaskmanager stop {name}"
                     )
                 dir_path = abspath(join(CACHE_DIR, filename))
                 rmtree(dir_path)
@@ -637,7 +637,7 @@ def remove_task_by_id(task_id: str):
                         raise TtmException(
                             "Cannot remove task while it's running.\n"
                             "To stop it, run:\n"
-                            f"ttm stop {task_id}"
+                            f"tinytaskmanager stop {task_id}"
                         )
                     dir_path = abspath(join(CACHE_DIR, filename))
                     rmtree(dir_path)
@@ -704,7 +704,7 @@ def run(
                 raise TtmException(
                     f"Task {name} already exists and it's not running.\n"
                     "To remove it, run:\n"
-                    f"ttm rm {name}"
+                    f"tinytaskmanager rm {name}"
                 )
         task = {
             "id": generate_id(),
@@ -1083,7 +1083,7 @@ def print_success(msg: str, *args, **kwargs):
 
 def print_help():
     print()
-    print("Usage:  ttm [OPTIONS] COMMAND")
+    print("Usage:  tinytaskmanager [OPTIONS] COMMAND")
     print()
     print("Tiny task manager for Linux, MacOS and Unix-like systems")
     print()
@@ -1106,7 +1106,7 @@ def print_help():
 
 def print_help_logs():
     print()
-    print("Usage:  ttm logs TASK")
+    print("Usage:  tinytaskmanager logs TASK")
     print()
     print("Display logs of a task.")
     print("TASK can be a task ID or a task name.")
@@ -1115,7 +1115,7 @@ def print_help_logs():
 
 def print_help_ls():
     print()
-    print("Usage:  ttm ls [OPTIONS]")
+    print("Usage:  tinytaskmanager ls [OPTIONS]")
     print()
     print("List tasks")
     print()
@@ -1126,7 +1126,7 @@ def print_help_ls():
 
 def print_help_rm():
     print()
-    print("Usage:  ttm rm [OPTIONS] [TASK]")
+    print("Usage:  tinytaskmanager rm [OPTIONS] [TASK]")
     print()
     print("Remove tasks.")
     print("TASK can be a task ID or a task name.")
@@ -1138,7 +1138,7 @@ def print_help_rm():
 
 def print_help_run():
     print()
-    print("Usage:  ttm run [OPTIONS] COMMAND")
+    print("Usage:  tinytaskmanager run [OPTIONS] COMMAND")
     print()
     print("Run a new task")
     print()
@@ -1146,26 +1146,26 @@ def print_help_run():
     print("  -s, --shell        Run COMMAND in a shell")
     print()
     print("Examples:")
-    print("  ttm run /path/to/my/program arg1 arg2")
-    print("  ttm run -s 'echo test >> myfile'")
+    print("  tinytaskmanager run /path/to/my/program arg1 arg2")
+    print("  tinytaskmanager run -s 'echo test >> myfile'")
     print()
 
 
 def print_help_start():
     print()
-    print("Usage:  ttm start TASK")
+    print("Usage:  tinytaskmanager start TASK")
     print()
     print("Start a task")
     print()
     print("Examples:")
-    print("  ttm start 3")
-    print("  ttm start mytaskname")
+    print("  tinytaskmanager start 3")
+    print("  tinytaskmanager start mytaskname")
     print()
 
 
 def print_help_stop():
     print()
-    print("Usage:  ttm stop TASK")
+    print("Usage:  tinytaskmanager stop TASK")
     print()
     print("Stop a task")
     print()
@@ -1175,15 +1175,15 @@ def print_help_stop():
     print("  -SIG              Send a specific signal instead of the default SIGTERM")
     print()
     print("Examples:")
-    print("  ttm stop 3")
-    print("  ttm stop mytaskname")
-    print("  ttm stop --kill my_hanged_task")
+    print("  tinytaskmanager stop 3")
+    print("  tinytaskmanager stop mytaskname")
+    print("  tinytaskmanager stop --kill my_hanged_task")
     print()
     print("  # Send a SIGINT signal to a task")
-    print("  ttm stop -2 my_interruptable_task")
+    print("  tinytaskmanager stop -2 my_interruptable_task")
     print()
     print("  # Send a SIGTERM signal to a task")
-    print("  ttm stop -9 my_hanged_task")
+    print("  tinytaskmanager stop -9 my_hanged_task")
     print()
 
 

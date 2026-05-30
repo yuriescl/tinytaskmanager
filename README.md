@@ -7,17 +7,17 @@ Written as a single Python script.
 
 Download the script directly (recommended):
 ```
-curl https://raw.githubusercontent.com/yuriescl/ttm/dev/ttm.py -o ttm
-chmod +x ttm
-./ttm
+curl https://raw.githubusercontent.com/yuriescl/tinytaskmanager/dev/tinytaskmanager.py -o tinytaskmanager
+chmod +x tinytaskmanager
+./tinytaskmanager
 ```
 
 ### Alternative installation methods
 
 #### Installing through pip
 ```
-pip install ttm
-ttm  # or python -m ttm
+pip install tinytaskmanager
+tinytaskmanager  # or python -m tinytaskmanager
 ```
 
 Requirements:
@@ -73,29 +73,29 @@ Comparison to other popular server task managers:
     - Very hard for beginners and non-sysadmins
     - Difficult to run simple tasks that don't need containers
 
-`ttm` was initially an attempt (after painfully having to deal with the existing options like PM2, systemctl, etc) to have a script I could easily copy to a server and manage simple tasks like a `gunicorn` server, or a `celery` worker. After a while, `ttm` became a very useful tool in day-to-day deployments, so it made sense to make it public.
+`tinytaskmanager` (previously named `ttm`) was initially an attempt (after painfully having to deal with the existing options like PM2, systemctl, etc) to have a script I could easily copy to a server and manage simple tasks like a `gunicorn` server, or a `celery` worker. After a while, `tinytaskmanager` became a very useful tool in day-to-day deployments, so it made sense to make it public.
 
 **Examples**
 
 Running a script:
 ```
-$ ttm run ./backup-database.sh --output /backups/database.sql
-$ ttm ls
+$ tinytaskmanager run ./backup-database.sh --output /backups/database.sql
+$ tinytaskmanager ls
 ID   NAME COMMAND                                              UPTIME PID    
 1    -    ./backup-database.sh --output /backups/database.sql  2s     742537 
-$ ttm stop 1
-$ ttm rm 1
+$ tinytaskmanager stop 1
+$ tinytaskmanager rm 1
 ```
 
 Running Django server:
 ```
-$ ttm run --name mydjangoserver python manage.py runserver
-$ ttm rm mydjangoserver
+$ tinytaskmanager run --name mydjangoserver python manage.py runserver
+$ tinytaskmanager rm mydjangoserver
 Cannot remove task while it's running.
 To stop it, run:
-ttm stop mydjangoserver
-$ ttm logs mydjangoserver
-$ ttm rm mydjangoserver
+tinytaskmanager stop mydjangoserver
+$ tinytaskmanager logs mydjangoserver
+$ tinytaskmanager rm mydjangoserver
 ```
 
 ## Development
